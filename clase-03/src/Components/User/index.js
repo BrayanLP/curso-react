@@ -22,6 +22,7 @@ class User extends Component {
       user: { avatar_url: foto, name: title },
       isLoading
     } = this.state;
+    console.log(this.state.user);
     return (
       <>
         {isLoading ? (
