@@ -6,6 +6,7 @@ const user = {
   node_id: "MDQ6VXNlcjE0OTgyMTkw",
   avatar_url: "https://avatars2.githubusercontent.com/u/14982190?v=4",
   gravatar_id: "",
+  repositorioss: [],
   url: "https://api.github.com/users/BrayanLP",
   html_url: "https://github.com/BrayanLP",
   followers_url: "https://api.github.com/users/BrayanLP/followers",
@@ -18,8 +19,8 @@ const user = {
   events_url: "https://api.github.com/users/BrayanLP/events{/privacy}",
   received_events_url: "https://api.github.com/users/BrayanLP/received_events",
   type: "User",
+  name: "Omar Montoya",
   site_admin: false,
-  name: "Brayan Lp",
   company: "Grupo Aizen ",
   blog: "htttp://brayanlp.com",
   location: "Perú",
@@ -35,9 +36,13 @@ const user = {
 };
 class OptionalChange extends Component {
   render() {
+    const name = oc(user).name("undefined");
+    const repos = oc(user).repositorios([]);
     return (
       <>
         <h1>Demostrando Optional Change</h1>
+        <p>mi nombre es: {name}</p>
+        <p>mis repositorios: {repos}</p>
       </>
     );
   }
