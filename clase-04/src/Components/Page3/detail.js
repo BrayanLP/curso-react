@@ -1,8 +1,8 @@
 import React from 'react';
-const Page3Detail = ({ detalleId }) => {
+const Page3Detail = ({ id }) => {
   return (
     <>
-      <h1>Detail Page 3: {detalleId} </h1>
+      <h1>Detail Page 3: {id} </h1>
     </>
   );
 };
