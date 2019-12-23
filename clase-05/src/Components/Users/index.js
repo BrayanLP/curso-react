@@ -50,19 +50,19 @@ const User = styled(Link)`
     }
   }
 `;
-export default ({ image, status, name, cargo, id }) => (
+export default ({ firstName, lastName, status, image, name, cargo, id, position: { description } }) => (
   <User className="card card-user" to={`/usuario/${id}`}>
     <div className="card-header">
-      <img src={image || ''} width="100" alt={name}></img>
-      {status === 'online' ? (
+      <img src={image || 'https://picsum.photos/40/40'} width="100" alt={name}></img>
+      {status === "validated" ? (
         <div className="status online">Activo</div>
       ) : (
-        <div className="status offline">Desconectado</div>
-      )}
+          <div className="status offline">Desconectado</div>
+        )}
     </div>
     <div className="card-body">
-      <h2>{name}</h2>
-      <p>{cargo}</p>
+      <h2>{firstName} {lastName}</h2>
+      <p>{description}</p>
     </div>
   </User>
 );
