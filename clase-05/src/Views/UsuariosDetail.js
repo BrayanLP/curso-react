@@ -118,12 +118,17 @@ const UserDetail = styled.div`
 class UsuariosDetail extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      detail: {
+        position: {
+          roles: []
+        }
+      }
+    };
   }
   componentDidMount() {
     const { id } = this.props;
     this.getUSerDetail(id);
-    // console.log('componentDidMount: ', id);
   }
   getUser = async () => {
     const users = await Axios.get(API, {
@@ -132,10 +137,7 @@ class UsuariosDetail extends Component {
         'Content-Type': 'application/json'
       }
     }).then(response => response.data);
-    console.log();
     return users;
-    // console.log(users);
-    // this.setState({ users });
   };
   getUSerDetail = async id => {
     const listsUsers = await this.getUser();
@@ -144,13 +146,22 @@ class UsuariosDetail extends Component {
   };
   render() {
     console.log('userDetail: ', this.state);
+    const {
+      username,
+      blocked,
+      email,
+      firstName,
+      lastName,
+      position
+    } = this.state.detail;
     return (
       <div className="App">
         <UserDetail className="card card-user-detail">
           <div className="card-header">
             <img
-              src="https://avatars1.githubusercontent.com/u/14982190?s=460&v=4"
+              src="https://cdn.auth0.com/blog/illustrations/reactjs.png"
               width="100"
+              height="100"
               alt={'name'}
             ></img>
             {true ? (
@@ -160,9 +171,11 @@ class UsuariosDetail extends Component {
             )}
           </div>
           <div className="card-body">
-            <h2>Brayan Laureano </h2>
-            <h4>brayanlp</h4>
-            <p>Agente Teleoperador Soporte 1</p>
+            <h2>
+              {firstName} {lastName}{' '}
+            </h2>
+            <h4>{username}</h4>
+            <p>{position.description}</p>
             <ul className="inline contact">
               <li>
                 <a href="/">
@@ -170,21 +183,25 @@ class UsuariosDetail extends Component {
                 </a>
               </li>
               <li>
-                <a href="/">
+                <a href={`mailto:${email}`}>
                   <i className="material-icons">email</i>
                 </a>
               </li>
               <li>
                 <a href="/">
-                  <i className="material-icons">lock</i>
+                  {blocked ? (
+                    <i className="material-icons">lock</i>
+                  ) : (
+                    <i className="material-icons">lock_open</i>
+                  )}
                 </a>
               </li>
             </ul>
             <ul className="roles">
-              {new Array(7).fill({}).map((res, index) => (
+              {position.roles.map((res, index) => (
                 <li key={index + 1}>
-                  <span>03/06/18</span>
-                  <p>Rol encargado de consultar el módulo de Ventas.</p>
+                  <span>{res.created}</span>
+                  <p>{res.description}</p>
                 </li>
               ))}
             </ul>
